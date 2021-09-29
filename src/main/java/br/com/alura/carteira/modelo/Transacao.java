@@ -4,6 +4,15 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -20,13 +29,23 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "transacoes")
 public @Data class Transacao {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String ticker;
-	private BigDecimal preco;
-	private int quantidade;
 	private LocalDate data;
+	private BigDecimal preco;
+	private Integer quantidade;
+	
+	@Enumerated(EnumType.STRING)
 	private TipoTransacao tipo;
+	
+	@ManyToOne
+	@JoinColumn
+	private Usuario usuario;
 	
 	
 
