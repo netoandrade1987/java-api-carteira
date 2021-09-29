@@ -1,6 +1,5 @@
 package br.com.alura.carteira.controller;
 
-
 import java.util.List;
 
 import javax.validation.Valid;
@@ -20,27 +19,20 @@ import br.com.alura.carteira.service.TransacaoService;
 @RequestMapping("/transacoes")
 public class TransacaoController {
 
-
-	
 	@Autowired
 	private TransacaoService transacaoService;
-	
 
 	@GetMapping
 	public List<TransacaoDto> listar() {
-		
-		
+
 		return transacaoService.listar();
-	
-		
 
 	}
 
 	@PostMapping
 	public void cadastrar(@RequestBody @Valid TransacaoFormDto transacaoFormDto) {
-		
-		transacaoService.cadastrar(transacaoFormDto);	
-		
+
+		transacaoService.cadastrar(transacaoFormDto);
 
 	}
 
