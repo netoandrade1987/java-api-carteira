@@ -1,10 +1,10 @@
 package br.com.alura.carteira.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,19 +20,19 @@ import br.com.alura.carteira.service.UsuarioService;
 public class UsuarioController {
 
 	@Autowired
-	private UsuarioService uService;
+	private UsuarioService usuarioService;
 
 	@GetMapping
-	public List<UsuarioDto> listar() {
+	public Page<UsuarioDto> listar(Pageable paginacao) {
 
-		return uService.listar();
+		return usuarioService.listar(paginacao);
 
 	}
 
 	@PostMapping
 	public void cadastrar(@RequestBody @Valid UsuarioFormDto usuarioFormDto) {
 
-		uService.cadastrar(usuarioFormDto);
+		usuarioService.cadastrar(usuarioFormDto);
 
 	}
 

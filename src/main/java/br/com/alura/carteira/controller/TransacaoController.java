@@ -5,6 +5,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +26,9 @@ public class TransacaoController {
 	private TransacaoService transacaoService;
 
 	@GetMapping
-	public List<TransacaoDto> listar() {
+	public Page<TransacaoDto> listar(@PageableDefault(size = 15) Pageable paginacao) {
 
-		return transacaoService.listar();
+		return transacaoService.listar(paginacao);
 
 	}
 

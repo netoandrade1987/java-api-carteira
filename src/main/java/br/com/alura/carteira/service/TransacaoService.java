@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,22 +27,21 @@ public class TransacaoService {
 	private ModelMapper modelMapper = new ModelMapper();
 	
 	
-	public List<TransacaoDto> listar() {
+	public Page<TransacaoDto> listar(Pageable paginacao) {
 		
-		List<Transacao> transacoes = transacaoRepository.findAll();
+		 Page<Transacao> transacoes = transacaoRepository.findAll(paginacao);
 		
-		return transacoes.stream().
-				map(t -> modelMapper.map(t, TransacaoDto.class)).
-				collect(Collectors.toList());
+		return transacoes.map(t -> modelMapper.map(t, TransacaoDto.class));
 
 	}
 	
 	
-	
+	@Transactional
 	public void cadastrar(@RequestBody @Valid TransacaoFormDto transacaoFormDto) {
 		
 		
 		Transacao transacao = modelMapper.map(transacaoFormDto, Transacao.class);
+		transacao.setId(null);
 		transacaoRepository.save(transacao);
 
 	}

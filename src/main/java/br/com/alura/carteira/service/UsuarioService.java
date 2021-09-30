@@ -1,10 +1,11 @@
 package br.com.alura.carteira.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.carteira.dto.UsuarioDto;
@@ -19,22 +20,23 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	private ModelMapper modelMapper = new ModelMapper();
+	
 
-	public List<UsuarioDto> listar() {
+	public Page<UsuarioDto> listar(Pageable paginacao) {
 
-		List<Usuario> usuarios = usuarioRepository.findAll();
+		Page<Usuario> usuarios = usuarioRepository.findAll(paginacao);
 
-		return usuarios.stream().map(u -> modelMapper.map(u, UsuarioDto.class))
-				.collect(Collectors.toList());
+		return usuarios.map(u -> modelMapper.map(u, UsuarioDto.class));
 
 	}
 
+	@Transactional
 	public void cadastrar(UsuarioFormDto usuarioFormDto) {
 
 		Usuario usuario = modelMapper.map(usuarioFormDto, Usuario.class);
 		usuario.setSenha(GeneratePassword.generatePass());
-
-		System.out.println(usuario.getLogin() + " " + usuario.getSenha());
+		
+		usuario.setId(null);
 
 		usuarioRepository.save(usuario);
 
