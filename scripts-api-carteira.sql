@@ -1,4 +1,4 @@
-use carteira;
+/*use carteira;
 
 drop database carteira;
 create database carteira;
@@ -42,3 +42,15 @@ drop table usuarios;
 alter table transacoes add column usuario_id bigint not null;
 alter table transacoes add foreign key(usuario_id) references usuarios(id);
 
+SELECT * FROM carteira.flyway_schema_history;
+
+*/
+
+
+use carteira;
+
+
+select * from transacoes;
+select * from usuarios;
+
+delete  from transacoes;

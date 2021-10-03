@@ -24,6 +24,7 @@ public class TransacaoService {
 	
 	@Autowired
 	private TransacaoRepository transacaoRepository;
+	
 	private ModelMapper modelMapper = new ModelMapper();
 	
 	
