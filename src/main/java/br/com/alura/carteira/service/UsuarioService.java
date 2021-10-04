@@ -37,7 +37,7 @@ public class UsuarioService {
 		
 		usuario.setSenha(GeneratePassword.generatePass());
 		
-		usuario.setId(null);
+		//usuario.setId(null);
 		
 		return modelMapper.map(usuarioRepository.save(usuario), UsuarioDto.class);
 

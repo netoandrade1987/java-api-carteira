@@ -7,6 +7,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -23,6 +24,7 @@ public @Data class TransacaoFormDto {
 	
 	@NotBlank
 	@Size(min = 3, max=15)
+	@Pattern(regexp = "[a-zA-Z]{4}[0-9][0-9]?")
 	private String ticker;
 	
 	@DecimalMin(value = "0.1")
