@@ -12,7 +12,7 @@ import br.com.alura.carteira.service.RelatorioService;
 
 @RestController
 @RequestMapping("/relatorios")
-public class RelatorioController {
+public class RelatoriosController {
 	
 	@Autowired
 	private RelatorioService service;

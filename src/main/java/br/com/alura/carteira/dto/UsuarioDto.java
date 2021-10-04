@@ -1,6 +1,8 @@
 package br.com.alura.carteira.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +14,10 @@ import lombok.ToString;
 @NoArgsConstructor
 public @Data class UsuarioDto {
 
+	@Positive
+	@NotNull
+	private Long id;	
+	
 	@NotBlank
 	private String nome;
 	@NotBlank

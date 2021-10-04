@@ -31,14 +31,15 @@ public class UsuarioService {
 	}
 
 	@Transactional
-	public void cadastrar(UsuarioFormDto usuarioFormDto) {
+	public UsuarioDto cadastrar(UsuarioFormDto usuarioFormDto) {
 
 		Usuario usuario = modelMapper.map(usuarioFormDto, Usuario.class);
+		
 		usuario.setSenha(GeneratePassword.generatePass());
 		
 		usuario.setId(null);
-
-		usuarioRepository.save(usuario);
+		
+		return modelMapper.map(usuarioRepository.save(usuario), UsuarioDto.class);
 
 	}
 

@@ -22,7 +22,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public @Data class TransacaoDto {
 	
-	
+	@Positive
+	@NotNull
+	private Long id;
 	
 	@NotBlank
 	@Size(min = 3, max=15)
